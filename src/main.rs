@@ -13,11 +13,13 @@ extern crate serde_derive;
 use dotenv::dotenv;
 
 mod sample;
+mod sensor_data;
 mod schema;
 mod connection;
 
 fn main() {
     dotenv().ok();
-    sample::router::create_routes();
+    //sample::router::create_routes();
+    sensor_data::router::create_routes();
 }
 

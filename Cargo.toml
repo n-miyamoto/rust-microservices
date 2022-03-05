@@ -5,9 +5,10 @@ authors = ["Gene Kuo <yuchiung10@yahoo.com.tw>"]
 edition = "2018"
 
 [dependencies]
+chrono = { version = "0.4", features = ["serde"] }
 rocket = "0.4.5"
 rocket_codegen = "0.4.5"
-diesel = { version = "1.4.4", features = ["postgres"] }
+diesel = { version = "1.4.4", features = ["postgres", "chrono"] }
 dotenv = "0.15.0"
 r2d2-diesel = "1.0.0"
 r2d2 = "0.8.9"

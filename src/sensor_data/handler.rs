@@ -8,19 +8,18 @@ use rocket_contrib::json::Json;
 use crate::connection::DbConn;
 use crate::sensor_data;
 use crate::sensor_data::model::SensorData;
-use crate::sensor_data::model::NewSensorData;
+use crate::sensor_data::model::ReceiveSensorData;
 
-#[get("/sensor_data")]
+#[get("/")]
 pub fn all_sensor_data(connection: DbConn) -> Result<Json<Vec<SensorData>>, Status> {
     sensor_data::repository::show_sensor_data(&connection)
         .map(|data| Json(data))
         .map_err(|error| error_status(error))
 }
 
-#[post("/", format ="application/json", data = "<new_sensor_data>")]
-pub fn create_sensor_data(new_sensor_data: Json<NewSensorData>, connection: DbConn) ->  Result<status::Created<Json<SensorData>>, Status> {
-    println!("here 0 {}",&new_sensor_data.id);
-    sensor_data::repository::create_sensor_data(new_sensor_data.into_inner(), &connection)
+#[post("/", format ="application/json", data = "<sensor_data>")]
+pub fn create_sensor_data(sensor_data: Json<ReceiveSensorData>, connection: DbConn) ->  Result<status::Created<Json<SensorData>>, Status> {
+    sensor_data::repository::create_sensor_data(sensor_data.into_inner(), &connection)
         .map(|data| sensor_data_created(data))
         .map_err(|error| error_status(error))
 

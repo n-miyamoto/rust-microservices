@@ -5,13 +5,22 @@ use diesel::prelude::*;
 
 use crate::sensor_data::model::SensorData;
 use crate::sensor_data::model::NewSensorData;
+use crate::sensor_data::model::ReceiveSensorData;
 
 use crate::schema::sensor_data;
 use crate::schema::sensor_data::dsl::*;
 
-pub fn create_sensor_data(new_sensor_data: NewSensorData, conn: &PgConnection) -> QueryResult<SensorData> {
+pub fn create_sensor_data(new_sensor_data: ReceiveSensorData, conn: &PgConnection) -> QueryResult<SensorData> {
+    let data = NewSensorData {
+        writekey: new_sensor_data.writeKey,
+        create_at:  chrono::Utc::now().naive_utc(),
+        d1: new_sensor_data.d1.parse::<f32>().unwrap(),
+        d2: new_sensor_data.d2.parse::<f32>().unwrap(),
+        d3: new_sensor_data.d3.parse::<f32>().unwrap(),
+    };
+
     diesel::insert_into(sensor_data::table)
-        .values(&new_sensor_data)
+        .values(&data)
         .get_result(conn)
 }
 

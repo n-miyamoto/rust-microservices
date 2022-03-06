@@ -1,6 +1,14 @@
 # rust-microservices
 ## Microservices with Rust
 
+## Setup env vars
+
+```sh
+export DATABASE_URL=postgres://username:password@127.0.0.1/postgres
+export ROCKET_PORT=8000                                                                                                                          
+export ROCKET_ADDRESS=127.0.0.1                                                                                                                  
+```
+
 ## Run postgres container
 `docker run --rm --detach --name postgres --env POSTGRES_USER=username --env POSTGRES_PASSWORD=password --publish 127.0.0.1:5432:5432 postgres`
 
@@ -28,6 +36,12 @@
 `curl http://localhost:8000/posts`
 
 `docker stop <postgres-container-id>`
+
+### test for sensor_data
+
+```sh
+curl -d '{"writeKey": "aaa", "d1": "123.45", "d2": "234.56", "d3": "345.67"}' -H "Content-Type: application/json" -X POST http://localhost:8000/sensor_data/
+```
 
 ## docker-compose deployment and test
 

@@ -7,18 +7,27 @@ use crate::schema::sensor_data;
 #[table_name = "sensor_data"]
 pub struct SensorData { 
     pub id: i32,
+    pub writekey: String, 
     pub create_at: chrono::NaiveDateTime,
-    pub data0: Option<f32>,
-    pub data1: Option<f32>,
-    pub data2: Option<f32>,
+    pub d1: f32,
+    pub d2: f32,
+    pub d3: f32,
 }
 
 #[derive(Insertable, Serialize, Deserialize)]
 #[table_name="sensor_data"]
 pub struct NewSensorData {
-    pub id: i32,
-    pub create_at : chrono::NaiveDateTime,
-    pub data0: f32,
-    pub data1: f32,
-    pub data2: f32,
+    pub create_at: chrono::NaiveDateTime,
+    pub writekey: String, 
+    pub d1: f32,
+    pub d2: f32,
+    pub d3: f32,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct ReceiveSensorData {
+    pub writeKey: String, 
+    pub d1: String,
+    pub d2: String,
+    pub d3: String,
 }

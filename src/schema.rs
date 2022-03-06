@@ -10,10 +10,11 @@ table! {
 table! {
     sensor_data (id) {
         id -> Int4,
+        writekey -> Text,
         create_at -> Timestamptz,
-        data0 -> Nullable<Float4>,
-        data1 -> Nullable<Float4>,
-        data2 -> Nullable<Float4>,
+        d1 -> Float4,
+        d2 -> Float4,
+        d3 -> Float4,
     }
 }
 

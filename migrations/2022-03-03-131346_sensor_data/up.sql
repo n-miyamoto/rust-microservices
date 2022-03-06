@@ -1,8 +1,9 @@
 -- Your SQL goes here
 CREATE TABLE sensor_data(
 	id SERIAL PRIMARY KEY,
+    writeKey TEXT NOT NULL,
     create_at timestamptz NOT NULL DEFAULT current_timestamp,
-    data0 real,
-    data1 real,
-    data2 real
+    d1 REAL NOT NULL,
+    d2 REAL NOT NULL,
+    d3 REAL NOT NULL
 );
